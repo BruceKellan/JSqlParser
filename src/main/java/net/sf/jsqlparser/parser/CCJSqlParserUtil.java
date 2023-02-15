@@ -247,6 +247,7 @@ public final class CCJSqlParserUtil {
         Statement statement = null;
         try {
             ExecutorService executorService = Executors.newSingleThreadExecutor();
+            // 使用单线程线程池，目的主要是为了做超时控制，如果在指定时间超时了，可以指定parser.interrupted为true，使得JavaCC的SQL解析停止
             Future<Statement> future = executorService.submit(new Callable<Statement>() {
                 @Override
                 public Statement call() throws Exception {
